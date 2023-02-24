@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+
+<!-- Mirrored from loopinfosol.in/themeforest/ekka-html-v33/ekka-admin/order-detail.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 08 Jan 2023 23:28:52 GMT -->
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Ekka - Admin Dashboard HTML Template.">
+
+  <title>Ekka - Admin Dashboard HTML Template.</title>
+
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&amp;family=Poppins:wght@300;400;500;600;700;800;900&amp;family=Roboto:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+
+  <link href="../../../../cdn.jsdelivr.net/npm/%40mdi/font%404.4.95/css/materialdesignicons.min.css" rel="stylesheet" />
+
+  <!-- PLUGINS CSS STYLE -->
+  <link href="/admin/plugins/simplebar/simplebar.css" rel="stylesheet" />
+
+  <!-- Ekka CSS -->
+  <link id="ekka-css" rel="stylesheet" href="/admin/css/ekka.css" />
+
+  <!-- FAVICON -->
+  <link href="/admin/img/favicon.png" rel="shortcut icon" />
+</head>
+
+<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-dark ec-header-light" id="body">
+
+  <!-- WRAPPER -->
+  <div class="wrapper">
+
+    <!-- LEFT MAIN SIDEBAR -->
+    <%-include('partials/sidebardashboard')  %>
+
+    <!-- PAGE WRAPPER -->
+    <div class="ec-page-wrapper">
+
+      <!-- Header -->
+
+
+      <!-- CONTENT WRAPPER -->
+      <div class="ec-content-wrapper">
+        <div class="content">
+
+          <div class="row">
+            <div class="col-12">
+              <div class="ec-odr-dtl card card-default">
+                <div class="card-header card-header-border-bottom d-flex justify-content-between">
+                  <h2 class="ec-odr">Order Detail<br>
+                    <span class="small">Order ID: <%=showorder._id.toString().substr(15)  %> </span>
+                  </h2>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+
+
+                    <div class="col-xl-3 col-lg-6">
+                      <address class="info-grid">
+                        <div class="info-title"><strong>shipped to</strong></div><br>
+                        <div class="info-content">
+                          name: <%=deliveryAddress.name%> <br>
+                          phone: <%=deliveryAddress.phone%> <br>
+                          address: <%=deliveryAddress.address%> <br>
+                          city: <%=deliveryAddress.city%> <br>
+                          state: <%=deliveryAddress.state%>
+
+                        </div>
+                      </address>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                      <address class="info-grid">
+                        <div class="info-title"><strong>user details</strong></div><br>
+                        <div class="info-content">
+                          <%=showorder.userId.name%> <br>
+                          <a href="#"> <%=showorder.userId.email %></a> <br>
+                          <a href="#"> <%=showorder.userId.phonenumber %></a>
+                          <br>
+                          <br>
+                        </div>
+                      </address>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                      <address class="info-grid">
+                        <div class="info-title"><strong>payment status</strong></div><br>
+                        <div class="info-content">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>choose here</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                              </select>
+                        </div>
+                      </address>
+                    </div>
+                    <div class="col-xl-3 col-lg-6">
+                      <address class="info-grid">
+                        <div class="info-title"><strong>order status</strong></div><br>
+                        <div class="info-content">
+                         
+                            <select class="form-select" id="orderstatus" onchange="orderstatus('<%=showorder._id%>')" aria-label="Default select example">
+                                <option selected>choose here</option>
+                                <option value="cancelled">canceled</option>
+                                <option value="shipped">shipped</option>
+                                <option value="delivered">deliverd</option>
+                                <option value="outfordelivery">outfordelivery</option>
+
+                              </select>
+                        </div>
+
+                      </address>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h3 class="tbl-title">PRODUCT SUMMARY</h3>
+                      <div class="table-responsive">
+                        <table class="table table-striped o-tbl">
+                          <thead>
+                            <tr class="line">
+                              <td><strong>ORDER ID</strong></td>
+                              <td class="text-center"><strong>IMAGE</strong></td>
+                              <td class="text-center"><strong>PRODUCT</strong></td>
+                              <td class="text-center"><strong>PRICE/UNIT</strong></td>
+                              <td class="text-right"><strong>QUANTITY</strong></td>
+                              <td class="text-right"><strong>SUBTOTAL</strong></td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                           
+                              <% for( let i = 0; i < showorder.products.length; i++ ) { %>
+                                <tr>
+                              <td><%= showorder._id.toString().substr(15)%></td>
+                              <td class="text-center"><img class="product-img" src="<%=showorder.products[i].product.image[0]%>" /></td>
+
+                              <td class="text-center"><%=showorder.products[i].product.name%></td>
+
+                              <td class="text-center"><%= showorder.products[i].product.price%></td>
+                              <td class="text-right"><%= showorder.products[i].quantity%></td>
+                              <td class="text-right"><%= showorder.products[i].totalprice%></td>
+                             
+
+                            </tr>
+                            <% } %>
+
+                            <tr>
+                              <td colspan="4"></td>
+                              <td class="text-right"><strong>Taxes</strong></td>
+                              <td class="text-right"><strong>N/A</strong></td>
+                            </tr>
+                            <tr>
+                              <td colspan="4">
+                              </td>
+                              <td class="text-right"><strong>Total</strong></td>
+                              <td class="text-right"><strong><%= showorder.subtotal%></strong></td>
+                            </tr>
+
+                            <tr>
+                              <td colspan="4">
+                              </td>
+                              <td class="text-right"><strong>Payment Status</strong></td>
+                              <td class="text-right"><strong>PAID</strong></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Tracking Detail -->
+              <div class="card mt-4 trk-order">
+                <div class="p-4 text-center text-white text-lg bg-dark rounded-top">
+                  <span class="text-uppercase">Tracking Order No - </span>
+                  <span class="text-medium">34VB5540K83</span>
+                </div>
+                <div class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
+                  <div class="w-100 text-center py-1 px-2"><span class="text-medium">Shipped
+                      Via:</span> UPS Ground</div>
+                  <div class="w-100 text-center py-1 px-2"><span class="text-medium">Status:</span>
+                    Checking Quality</div>
+                  <div class="w-100 text-center py-1 px-2"><span class="text-medium">Expected
+                      Date:</span> DEC 09, 2021</div>
+                </div>
+                <div class="card-body">
+                  <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
+                    <div class="step completed">
+                      <div class="step-icon-wrap">
+                        <div class="step-icon"><i class="mdi mdi-cart"></i></div>
+                      </div>
+                      <h4 class="step-title">Confirmed Order</h4>
+                    </div>
+                    <div class="step completed">
+                      <div class="step-icon-wrap">
+                        <div class="step-icon"><i class="mdi mdi-tumblr-reblog"></i></div>
+                      </div>
+                      <h4 class="step-title">Processing Order</h4>
+                    </div>
+                    <div class="step completed">
+                      <div class="step-icon-wrap">
+                        <div class="step-icon"><i class="mdi mdi-gift"></i></div>
+                      </div>
+                      <h4 class="step-title">Product Dispatched</h4>
+                    </div>
+                    <div class="step">
+                      <div class="step-icon-wrap">
+                        <div class="step-icon"><i class="mdi mdi-truck-delivery"></i></div>
+                      </div>
+                      <h4 class="step-title">On Delivery</h4>
+                    </div>
+                    <div class="step">
+                      <div class="step-icon-wrap">
+                        <div class="step-icon"><i class="mdi mdi-hail"></i></div>
+                      </div>
+                      <h4 class="step-title">Product Delivered</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- End Content -->
+      </div> <!-- End Content Wrapper -->
+
+      <!-- Footer -->
+      <footer class="footer mt-auto">
+        <div class="copyright bg-white">
+          <p>
+            Copyright &copy; <span id="ec-year"></span><a class="text-primary" href="https://themeforest.net/user/ashishmaraviya" target="_blank"> Ekka Admin
+              Dashboard</a>. All Rights Reserved.
+          </p>
+        </div>
+      </footer>
+
+    </div> <!-- End Page Wrapper -->
+  </div> <!-- End Wrapper -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.4.1/axios.min.js"></script>
+<script>
+    
+    function orderstatus(id){
+        console.log('keriiiiiiiiiiiiiiii');
+
+      let values=document.getElementById('orderstatus').value
+      console.log(values);
+        console.log(id);
+      axios.post(`/admin/orderhistory?values=${values}&id=${id}`).then((result)=>{
+
+      })
+      
+    }
+</script>
+  <!-- Common Javascript -->
+  <script src="/admin/plugins/jquery/jquery-3.5.1.min.js"></script>
+  <script src="/admin/js/bootstrap.bundle.min.js"></script>
+  <script src="/admin/plugins/simplebar/simplebar.min.js"></script>
+  <script src="/admin/plugins/jquery-zoom/jquery.zoom.min.js"></script>
+  <script src="/admin/plugins/slick/slick.min.js"></script>
+
+  <!-- Option Switcher -->
+  <script src="/admin/plugins/options-sidebar/optionswitcher.js"></script>
+
+  <!-- Ekka Custom -->
+  <script src="/admin/js/ekka.js"></script>
+</body>
+
+
+<!-- Mirrored from loopinfosol.in/themeforest/ekka-html-v33/ekka-admin/order-detail.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 08 Jan 2023 23:28:52 GMT -->
+
+</html>

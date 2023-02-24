@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+
+<!-- Mirrored from loopinfosol.in/themeforest/ekka-html-v33/ekka-admin/order-history.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 08 Jan 2023 23:28:52 GMT -->
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Ekka - Admin Dashboard HTML Template.">
+
+	<title>Ekka - Admin Dashboard HTML Template.</title>
+
+	<!-- GOOGLE FONTS -->
+	<link rel="preconnect" href="https://fonts.googleapis.com/">
+	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&amp;family=Poppins:wght@300;400;500;600;700;800;900&amp;family=Roboto:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
+
+	<link href="../../../../cdn.jsdelivr.net/npm/%40mdi/font%404.4.95/css/materialdesignicons.min.css" rel="stylesheet" />
+
+	<!-- PLUGINS CSS STYLE -->
+	<link href="/admin/plugins/simplebar/simplebar.css" rel="stylesheet" />
+
+	<!-- Data-Tables -->
+	<link href='/admin/plugins/data-tables/datatables.bootstrap5.min.css' rel='stylesheet'>
+	<link href='/admin/plugins/data-tables/responsive.datatables.min.css' rel='stylesheet'>
+
+	<!-- Ekka CSS -->
+	<link id="ekka-css" rel="stylesheet" href="/admin/css/ekka.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+	<!-- FAVICON -->
+	<link href="/admin/img/favicon.png" rel="shortcut icon" />
+</head>
+
+<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-dark ec-header-light" id="body">
+
+	<!-- WRAPPER -->
+	<div class="wrapper">
+        <%-include('partials/sidebardashboard')  %> 
+		<!-- LEFT MAIN SIDEBAR -->
+		
+
+		<!-- PAGE WRAPPER -->
+		<div class="ec-page-wrapper">
+
+			<!-- Header -->
+			<%-include('partials/mainheader')  %> 
+
+			<!-- CONTENT WRAPPER -->
+			<div class="ec-content-wrapper">
+				<div class="content">
+					<div class="breadcrumb-wrapper breadcrumb-wrapper-2">
+						<h1>banner list</h1>
+						<p class="breadcrumbs"><span><a href="index.html">Home</a></span>
+							<span><i class="mdi mdi-chevron-right"></i></span>History
+						</p>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card card-default">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table id="" class="table" style="width:100%">
+											<thead>
+												<tr>
+													
+													
+													<th>image</th>
+													<th>title</th>
+													<th>description</th>
+													<th>url</th>
+													<th>remove</th>
+													<th>edit</th>
+													
+												</tr>
+											</thead>
+
+											<tbody>
+												
+                                                  <% for( let i = 0; i < bannerlisting.length; i++ ) { %>
+                                                    <tr>
+														<td ><img src="<%=bannerlisting[i].image%>" alt="" width="160px" height="120px"></td>
+
+													<td><%= bannerlisting[i].title %> </td>
+
+													<td><%= bannerlisting[i].description %></td>
+													<td><%= bannerlisting[i].url %></td>
+													
+													<!-- <td><= dailyreports[i].totalprice*(15/100) %>  %></td> -->
+													<!-- <td><= orders[i].paymentmethod %></td> -->
+													<!-- <td><span class="mb-2 mr-2 badge badge-secondary"><= orders[i].orderstatus %></span></td> -->
+													<!-- <td><= orders[i].createdAt.toLocaleDateString()%></td> -->
+													<td>
+														<span style="color: rgb(150, 6, 6);" onclick="bannerdelete('<%= bannerlisting[i]._id %> ')"><i class="fa-solid fa-trash"></i></span>
+														<!-- <a href="/admin/orderhistoryview/<orders[i]._id%>"><span class="badge rounded-pill bg-info text-dark">view</span></a> -->
+													</td>
+													<td>
+														<span><a href="/admin/banneredit/<%= bannerlisting[i]._id %> "><i class="fa-solid fa-pen-to-square" style="color: darkblue;"></i></a></span>
+														<!-- <span style="color: brown;" onclick="banneredit('<= bannerlisting[i]._id %> ')"><i class="fa-solid fa-pen-to-square"></i></span> -->
+													</td>
+                                                   
+												</tr>
+												
+                                                <% } %> 
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <!-- End Content -->
+			</div> <!-- End Content Wrapper -->
+
+
+			<!-- Footer -->
+			
+
+		</div> <!-- End Page Wrapper -->
+	</div> <!-- End Wrapper -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.3/axios.min.js"></script>
+
+	<!-- Common Javascript -->
+	<script src="/admin/plugins/jquery/jquery-3.5.1.min.js"></script>
+	<script src="/admin/js/bootstrap.bundle.min.js"></script>
+	<script src="/admin/plugins/simplebar/simplebar.min.js"></script>
+	<script src="/admin/plugins/jquery-zoom/jquery.zoom.min.js"></script>
+	<script src="/admin/plugins/slick/slick.min.js"></script>
+
+	<!-- Data-Tables -->
+	<script src='/admin/plugins/data-tables/jquery.datatables.min.js'></script>
+	<script src='/admin/plugins/data-tables/datatables.bootstrap5.min.js'></script>
+	<script src='/admin/plugins/data-tables/datatables.responsive.min.js'></script>
+
+	<!-- Option Switcher -->
+	<script src="/admin/plugins/options-sidebar/optionswitcher.js"></script>
+
+	<!-- Ekka Custom -->
+	<script src="/admin/js/ekka.js"></script>
+	<script>
+		function bannerdelete(banner){
+			console.log('keriiii');
+			console.log(banner);
+			event.preventDefault();
+			axios.post(`/admin/bannerdelete?banner=${banner}`).then((result)=>{
+				
+				location.reload()
+			})
+		}
+
+		function banneredit(editing){
+			console.log('keruuu');
+			console.log(editing);
+			event.preventDefault()
+			axios.post(`/admin/banneredit?edit=${editing}`).then((result)=>{
+
+			})
+		}
+	</script>
+</body>
+
+
+<!-- Mirrored from loopinfosol.in/themeforest/ekka-html-v33/ekka-admin/order-history.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 08 Jan 2023 23:28:52 GMT -->
+</html>
+
+
+

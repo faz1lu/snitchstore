@@ -1,0 +1,322 @@
+
+
+
+
+
+
+
+<!--========================================================= 
+    Item Name: Ekka - Ecommerce HTML Template.
+    Author: ashishmaraviya
+    Version: 3.3
+    Copyright 2022-2023
+	Author URI: https://themeforest.net/user/ashishmaraviya
+ ============================================================-->
+ <!DOCTYPE html>
+ <html lang="en">
+
+ 
+<!-- Mirrored from loopinfosol.in/themeforest/ekka-html-v33/ekka-html/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 08 Jan 2023 23:18:54 GMT -->
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="x-ua-compatible" content="ie=edge" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+     
+     <title></title>
+     <meta name="keywords" content="apparel, catalog, clean, ecommerce, ecommerce HTML, electronics, fashion, html eCommerce, html store, minimal, multipurpose, multipurpose ecommerce, online store, responsive ecommerce template, shops" />
+     <meta name="description" content="Best ecommerce html template for single and multi vendor store.">
+     <meta name="author" content="ashishmaraviya">
+     
+    <!-- site Favicon -->
+    <link rel="icon" href="/user/images/favicon/favicon.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/user/images/favicon/favicon.png" />
+    <meta name="msapplication-TileImage" content="/user/images/favicon/favicon.png" />
+
+    <!-- css Icon Font -->
+    <link rel="stylesheet" href="/user/css/vendor/ecicons.min.css" />
+
+    <!-- css All Plugins Files -->
+    <link rel="stylesheet" href="/user/css/plugins/animate.css" />
+    <link rel="stylesheet" href="/user/css/plugins/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/user/css/plugins/jquery-ui.min.css" />
+    <link rel="stylesheet" href="/user/css/plugins/countdownTimer.css" />
+    <link rel="stylesheet" href="/user/css/plugins/slick.min.css" />
+    <link rel="stylesheet" href="/user/css/plugins/nouislider.css" />
+    <link rel="stylesheet" href="/user/css/plugins/bootstrap.css" />
+
+    <!-- Main Style -->
+    <link rel="stylesheet" href="/user/css/style.css" />
+    <link rel="stylesheet" href="/user/css/responsive.css" />
+
+    <!-- Background css -->
+    <link rel="stylesheet" id="bg-switcher-css" href="/user/css/backgrounds/bg-4.css">
+    
+</head>
+<body class="cart_page">
+    <div id="ec-overlay"><span class="loader_img"></span></div>
+
+    <!-- Header start  -->
+    
+    
+            
+
+              
+
+        <%-include('partials/header')  %> 
+    <!-- ekka Cart End -->
+
+    <!-- Ec breadcrumb start -->
+    <div class="sticky-header-next-sec  ec-breadcrumb section-space-mb">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row ec_breadcrumb_inner">
+                        <div class="col-md-6 col-sm-12">
+                            <h2 class="ec-breadcrumb-title">Cart</h2>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Ec breadcrumb end -->
+
+
+    <!-- Ec cart page -->
+    <section class="ec-page-content section-space-p">
+        <div class="container">
+            <div class="row">
+                <div class="ec-cart-leftside col-lg-8 col-md-12 ">
+                    <!-- cart content Start -->
+                    <div class="ec-cart-content">
+                        <div class="ec-cart-inner">
+                            <div class="row">
+                                <form action="#">
+                                    <div class="table-content cart-table-content">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Product</th>
+                                                    <th>Price</th>
+                                                    <th style="text-align: center;">Quantity</th>
+                                                    <th>Total</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                               
+                                                  
+                                              
+
+                                               
+                                                <% for(cart of cartitems.items) {%>
+                                                    
+                                                    <tr id="cartid<%= cart.product._id %>" >
+                                                        <td data-label="Product" class="ec-cart-pro-name"><a
+                                                            href="product-left-sidebar.html"><img class="ec-cart-pro-img mr-4"
+                                                            src="<%=cart.product.image[0]%>"
+                                                            alt="" /> <%=cart.product.name %></a></td>
+                                                            <td data-label="Price" class="ec-cart-pro-price"><span 
+                                                                class="amount"><%=cart.product.price %></span></td>
+                                                           <td data-label="Quantity" class="ec-cart-pro-qty"
+                                                                style="text-align: center;">
+                                                                <div class="cart-qty-plus-minus">
+                                                                    <input class="cart-plus-minus" type="text" id="<%-cart.product._id-%>"
+                                                                    name="cartqtybutton" value="<%=cart.quantity%>" />
+                                                                    <div class="ec_cart_qtybtn" >
+                                                                        
+                                                                        <div class="inc ec_qtybtn" id="helloo<%-cart.product._id-%>" onclick="changequantity('<%-cartitems._id-%>','<%-cart.product._id-%>','1')">+</div>
+                                                                        
+                                                                        <div id="hello<%-cart.product._id-%>" class="dec ec_qtybtn" onclick="changequantity('<%-cartitems._id-%>','<%-cart.product._id-%>','-1')">-</div></div>
+                                                                 
+                                                                </div>
+                                                            </td> 
+                                                           
+                                                            <td data-label="Total"  id="price<%= cart.product._id %>" class="ec-cart-pro-subtotal"><%= cart.totalprice %></td>
+                                                            <td data-label="Remove" class="ec-cart-pro-remove">
+                                                                <a  onclick="deleteproduct('<%= cart.product._id %>')"><i class="ecicon eci-trash-o"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                        <% } %> 
+                                                
+                                             
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="ec-cart-update-bottom">
+                                                <a href="/shop" style="text-decoration: none;">Continue Shopping</a>
+                                               <!-- <a href="/checkout" class="btn btn-primary">Check Out</a>  -->
+                                              <a href="/checkout" class="btn btn-secondary btn-lg" tabindex="1" role="button" aria-disabled="true" style="color: #fff; text-decoration: none;">Checkout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--cart content End -->
+                </div>
+                <!-- Sidebar Area Start -->
+                <div class="ec-cart-rightside col-lg-4 col-md-12">
+                    <div class="ec-sidebar-wrap">
+                        <!-- Sidebar Summary Block -->
+                        <div class="ec-sidebar-block">
+                            <div class="ec-sb-title">
+                                <h3 class="ec-sidebar-title">Summary</h3>
+                            </div>
+                           
+
+                            <div class="ec-sb-block-content">
+                                <div class="ec-cart-summary-bottom">
+                                    <div class="ec-cart-summary">
+                                        <div>
+                                            <span class="text-left">Sub-Total</span>
+                                            <span class="text-right">₹ <%=cartitems.cartTotal %> </span>
+                                        </div>
+                                        <div>
+                                            <span class="text-left">Delivery Charges</span>
+                                            <span class="text-right">₹ 0.00</span>
+                                        </div>
+                                        
+                                        
+                                        <div class="ec-cart-summary-total">
+                                            <span class="text-left">Total Amount</span>
+                                            <span class="text-right" id="total" >₹ <%=cartitems.cartTotal  %> </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Sidebar Summary Block -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Product Start -->
+  
+
+
+ <!-- axios cdn -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js"></script>
+
+ <!-- sweet alert cdn -->
+ <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+    <Script>
+
+       async function deleteproduct(id){
+
+        Swal.fire({
+                    icon: "warning",
+                    title: "Are you sure?",
+                    text: "Product remove form cart!",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "remove",
+                }).then(async (result) => {
+                    if (result.isConfirmed) {
+                        await axios.delete(`/deleteproduct?productid=${id}`).then((result)=>{
+                            Swal.fire("removed!", "item has been deleted.", "success").then((response) => {
+                                location.reload();
+                            });
+
+                        })
+                        
+                        
+                    }
+                });
+        
+        
+      
+
+       } </Script>
+
+       <script>
+        async function changequantity(cartid, productid, count){
+    
+                                let qty = await document.getElementById(productid).value
+                                qty = parseInt(qty)
+        axios.patch(`/changequantity?cartid=${cartid}&productid=${productid}&cartcount=${count}`).then((changeqty) => {
+
+
+                            if (changeqty.data.stock) {
+                                        const Toast = Swal.mixin({
+                                            toast: true,
+                                            position: 'top-end',
+                                            showConfirmButton: false,
+                                            timer: 3000,
+                                            timerProgressBar: true,
+                                            didOpen: (toast) => {
+                                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                            }
+                                        })
+
+                                        Toast.fire({
+                                            icon: 'error',
+                                            title: 'Out Of Stock!!'
+                                        })
+                                        return
+                                    } else {
+                                        console.log(changeqty.data.totalprice);
+                                        document.getElementById(productid).value = changeqty.data.qty
+                                        document.getElementById('total').innerHTML = changeqty.data.total
+                                        document.getElementById(`price${productid}`).innerHTML = changeqty.data.totalprice
+                                        
+                                        if (changeqty.data.qty == 1) {
+                                            document.getElementById('hello' + productid).style.visibility = 'hidden';
+                                        } else {
+                                            document.getElementById('hello' + productid).style.visibility = 'visible';
+                                        }
+                                    }
+
+                             } )}
+       </script>
+    <!-- New Product end -->
+
+    <!-- Footer Start -->
+
+
+   <%-include('partials/footer')  %> 
+    <!-- Feature tools end -->
+
+    <!-- Vendor JS -->
+    <script src="/user/js/vendor/jquery-3.5.1.min.js"></script>
+    <script src="/user/js/vendor/popper.min.js"></script>
+    <script src="/user/js/vendor/bootstrap.min.js"></script>
+    <script src="/user/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="/user/js/vendor/modernizr-3.11.2.min.js"></script>
+
+    <!--Plugins JS-->
+    <script src="/user/js/plugins/swiper-bundle.min.js"></script>
+    <script src="/user/js/plugins/countdownTimer.min.js"></script>
+    <script src="/user/js/plugins/scrollup.js"></script>
+    <script src="/user/js/plugins/jquery.zoom.min.js"></script>
+    <script src="/user/js/plugins/slick.min.js"></script>
+    <script src="/user/js/plugins/infiniteslidev2.js"></script>
+    <script src="/user/js/vendor/jquery.magnific-popup.min.js"></script>
+    <script src="/user/js/plugins/jquery.sticky-sidebar.js"></script>
+    <!-- Google translate Js -->
+    <script src="/user/js/vendor/google-translate.js"></script>
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+        }
+    </script>
+    <!-- Main Js -->
+    <script src="/user/js/vendor/index.js"></script>
+    <script src="/user/js/main.js"></script>
+
+</body>
+
+
+<!-- Mirrored from loopinfosol.in/themeforest/ekka-html-v33/ekka-html/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 08 Jan 2023 23:18:54 GMT -->
+</html>
