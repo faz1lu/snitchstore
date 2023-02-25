@@ -605,7 +605,7 @@ const placeorder=async(req,res)=>{
       orderstatus: "Confirmed",
     });
     await neworder.save().then((result) => {
-    
+      req.session.orderid=result._id
       let userOrderdata = result;
 
       let response = {
@@ -632,8 +632,10 @@ const orderlist=async(req,res)=>{
 
   try {
      const user=req.session.users
-     const orderlisting=await order.find({_id: req.session.orderid}).populate('products.product').populate("address").sort({createdAt:-1})
-
+     const orderlisting=await order.findOne({_id: req.session.orderid}).populate('products.product').populate("address").sort({createdAt:-1})
+    console.log( orderlisting);
+    // const findaddress=orderlisting.address
+    // let index =  orderlisting.address.findIndex((el) => el._id ==orderaddress);
     const ord=res.render('user/successpage',{orderlisting})
 
   } catch (error) {

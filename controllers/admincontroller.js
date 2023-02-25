@@ -16,17 +16,24 @@ const adminlogin = (req, res) => {
 
 let adminemail = "muhammmadfazil@gmail.com"
 let adminpassword = 1234
-const adminloginpost = (req, res) => {
-    if (req.body.email == adminemail && req.body.password == adminpassword) {
+const adminloginpost =async (req, res) => {
 
-        res.render('admin/admindashboard')
-        
+    if (req.body.email == adminemail && req.body.password == adminpassword) {
+        req.session.admin=true
+       
+        res.render('admin/admindashboard')    
     } else {
         res.redirect('/admin')
     }
 }
 
-const admindashboard = (req, res) => res.render('admin/admindashboard')
+
+const admindashboard = async(req, res) =>{
+
+   
+
+     res.render('admin/admindashboard')
+}
 
 
 
@@ -415,6 +422,60 @@ const banneredit=async(req,res)=>{
     res.render('admin/editbanner',{editfind})
 
 }
+const bannereditpost=async(req,res)=>{
+   
+    const id=req.params.id
+    console.log(id,'hhhh');
+    try {
+       
+
+        const images = req.files.image;
+        const pro = {
+            name: req.body.title,
+            description: req.body.description,
+            url: req.body.url,
+            
+        };
+        console.log(pro,'muuuuuu');
+
+        if (images) {
+            img = [];
+            images.forEach((el, i, arr) => {
+                img.push(arr[i].path.substring(6));
+            });
+
+            const productz = await banner.updateOne(
+                { _id: id },
+                {
+                    $set: {
+                        title: pro.name,
+                        description: pro.description,
+                        url: pro.url,
+                       
+                    }
+                }
+            );
+        } else {
+            const productz = await banner.updateOne(
+                { _id: id },
+                {
+                    $set: {
+                        title: pro.name,
+                        description: pro.description,
+                        url: pro.url,
+                    }
+                }
+            );
+        }
+        res.redirect("/admin/bannerlist");
+    }
+
+
+    catch (error) {
+        console.log(error);
+    }
+
+}
 
 
 
@@ -585,6 +646,47 @@ const pieChart=async(req,res)=>{
        
       }
 }
+const dailyChart = async (req, res,next) => {
+
+    try {
+      const order = await order.find({});
+    let today = new Date();
+    let startDate = new Date(today.setUTCHours(0, 0, 0, 0));
+    let endDate = new Date(today.setUTCHours(23, 59, 59, 999));
+  
+   const todaySales = await order.aggregate([
+      {
+        $match: {
+          orderstatus: { $eq: "delivered" },
+          createdAt: { $lt: endDate, $gt: startDate },
+        },
+      },
+      {
+        $group: {
+          _id: "",
+  
+          total: { $sum: "$subtotal" },
+          count:{$sum:1}
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+        },
+      },
+    ]);
+    const totalAmount=todaySales[0].total
+    const totalOrder=todaySales[0].count
+    console.log( totalAmount,1111111);
+      res.json({status:true,totalAmount,totalOrder})
+    } catch (error) {
+      console.log(error);
+      error.admin=true
+      next(error)
+    }
+    
+    
+  };
 module.exports = {
     adminlogin,
     admindashboard,
@@ -599,6 +701,6 @@ module.exports = {
     categorydelete,bannerdelete,
     productlist, productdelete, productedit, editing, getcoupan, coupanpost,
     coupandelete, orderhistory, orderhistoryview, orderhistorystatus, bannerss, dailyreport,
-    monthlyreport, yearlyreport, bannerpost, bannerlist,banneredit,monthlychart,pieChart
+    monthlyreport, yearlyreport, bannerpost, bannerlist,banneredit,monthlychart,pieChart,bannereditpost
 
 }

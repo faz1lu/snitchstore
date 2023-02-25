@@ -21,7 +21,7 @@ const {admindashboard,
      categorysetting,bannerlist,
      categorydelete,productdelete,productedit,orderhistorystatus,bannerss,bannerpost,monthlychart,
      editing,coupanpost,getcoupan,coupandelete,orderhistory,orderhistoryview,dailyreport,banneredit,
-     pieChart
+     pieChart,bannereditpost
      }=require('../controllers/admincontroller')
  const category = require('../models/category')
 
@@ -46,6 +46,7 @@ const {admindashboard,
  router.post('/orderhistory',orderhistorystatus)
  router.get('/orderhistoryview/:id',orderhistoryview)
  router.get('/banner',bannerss)
+ router.post('/bannereditpost/:id',productPhotos,bannereditpost)
  router.get('/daily',varifyAdmin,dailyreport)
  router.get('/month',varifyAdmin, monthlyreport)
  router.get('/year',varifyAdmin,yearlyreport)
