@@ -56,8 +56,8 @@ const{
     router.post('/ordercancel',cancelorderinprofile)
     router.post('/paypalpost',paypalpost)
     router.get('/forgotpassword',forgotpassword)
-router.post('/forgotpassword',forgotpasswordpost)
-router.post('/forgotOtp',forgotOtpVerify)
-router.patch('/changepassword',changePassword)
+    router.post('/forgotpassword',forgotpasswordpost)
+    router.post('/forgotOtp',forgotOtpVerify)
+    router.patch('/changepassword',changePassword)
     
     module.exports=router

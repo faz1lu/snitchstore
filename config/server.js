@@ -2,7 +2,7 @@
 const mongoose=require('mongoose');
 mongoose.set('strictQuery', false);
 module.exports.dbConnection=function (cb){
-    mongoose.connect('mongodb://127.0.0.1:27017/project', {
+    mongoose.connect('mongodb+srv://fazil:fazil@snitchstore.m04xmwe.mongodb.net/snitchstore?retryWrites=true&w=majority', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }).then(()=>{
@@ -13,7 +13,6 @@ module.exports.dbConnection=function (cb){
     })
     
 }
-
 
 // const userschema=new mongoose.Schema({
 //     name:String,
